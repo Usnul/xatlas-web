@@ -2,6 +2,8 @@ name: Build
 on: [push]
 jobs:
   Compile:
-    runs-on: emscripten/emsdk
+    runs-on: ubuntu-latest
+    container: 
+      image: emscripten/emsdk
     steps:
       - run: ./build-web.sh
