@@ -15,26 +15,26 @@ void cleanUpMesh(){
     }
 
     if(meshDecl->indexData != nullptr){
-        free(meshDecl->indexData);
+        delete[] (uint32_t*)meshDecl->indexData;
         meshDecl->indexData = nullptr;
     }
 
     if(meshDecl->vertexPositionData != nullptr){
-        free(meshDecl->vertexPositionData);
+        delete[] (float*)meshDecl->vertexPositionData;
         meshDecl->vertexPositionData = nullptr;
     }
 
     if(meshDecl->vertexNormalData != nullptr){
-        free(meshDecl->vertexNormalData);
+        delete[] (float*)meshDecl->vertexNormalData;
         meshDecl->vertexNormalData = nullptr;
     }
 
     if(meshDecl->vertexUvData != nullptr){
-        free(meshDecl->vertexUvData);
+        delete[] (float*)meshDecl->vertexUvData;
         meshDecl->vertexUvData = nullptr;
     }
 
-    free(meshDecl);
+    delete meshDecl;
     meshDecl = nullptr;
 }
 
