@@ -9,34 +9,34 @@ void createAtlas() {
   atlas = xatlas::Create();
 }
 
-// void cleanUpMesh(){
-//     if(meshDecl == nullptr){
-//         return;
-//     }
-//
-//     if(meshDecl->indexData != nullptr){
-//         delete[] (uint32_t*)meshDecl->indexData;
-//         meshDecl->indexData = nullptr;
-//     }
-//
-//     if(meshDecl->vertexPositionData != nullptr){
-//         delete[] (float*)meshDecl->vertexPositionData;
-//         meshDecl->vertexPositionData = nullptr;
-//     }
-//
-//     if(meshDecl->vertexNormalData != nullptr){
-//         delete[] (float*)meshDecl->vertexNormalData;
-//         meshDecl->vertexNormalData = nullptr;
-//     }
-//
-//     if(meshDecl->vertexUvData != nullptr){
-//         delete[] (float*)meshDecl->vertexUvData;
-//         meshDecl->vertexUvData = nullptr;
-//     }
-//
-//     delete meshDecl;
-//     meshDecl = nullptr;
-// }
+void cleanUpMesh(){
+    if(meshDecl == nullptr){
+        return;
+    }
+
+    if(meshDecl->indexData != nullptr){
+        delete[] (uint32_t*)meshDecl->indexData;
+        meshDecl->indexData = nullptr;
+    }
+
+    if(meshDecl->vertexPositionData != nullptr){
+        delete[] (float*)meshDecl->vertexPositionData;
+        meshDecl->vertexPositionData = nullptr;
+    }
+
+    if(meshDecl->vertexNormalData != nullptr){
+        delete[] (float*)meshDecl->vertexNormalData;
+        meshDecl->vertexNormalData = nullptr;
+    }
+
+    if(meshDecl->vertexUvData != nullptr){
+        delete[] (float*)meshDecl->vertexUvData;
+        meshDecl->vertexUvData = nullptr;
+    }
+
+    delete meshDecl;
+    meshDecl = nullptr;
+}
 
 MeshBufferInfo createMesh(uint32_t vertexCount, uint32_t indexCount, bool normals, bool uvs) {
   MeshBufferInfo meshBufferInfo;

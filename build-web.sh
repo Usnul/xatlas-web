@@ -14,6 +14,7 @@ echo "============================================="
   # Compile C/C++ code
   emcc \
     -std=c++11 \
+    -fno-rtti
     -DXA_MULTITHREADED=0 \
     -DNDEBUG \
     ${OPTIMIZE} \
