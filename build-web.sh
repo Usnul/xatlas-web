@@ -18,6 +18,7 @@ echo "============================================="
     -DNDEBUG \
     ${OPTIMIZE} \
     --bind \
+    -s AUTO_NATIVE_LIBRARIES \
     -s STRICT=1 \
     -s ALLOW_MEMORY_GROWTH=1 \
     -s MALLOC=emmalloc \
