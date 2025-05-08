@@ -9,6 +9,35 @@ void createAtlas() {
   atlas = xatlas::Create();
 }
 
+void cleanUpMesh(){
+    if(meshDecl == nullptr){
+        return;
+    }
+
+    if(meshDecl->indexData != nullptr){
+        free(meshDecl->indexData);
+        meshDecl->indexData = nullptr;
+    }
+
+    if(meshDecl->vertexPositionData != nullptr){
+        free(meshDecl->vertexPositionData);
+        meshDecl->vertexPositionData = nullptr;
+    }
+
+    if(meshDecl->vertexNormalData != nullptr){
+        free(meshDecl->vertexNormalData);
+        meshDecl->vertexNormalData = nullptr;
+    }
+
+    if(meshDecl->vertexUvData != nullptr){
+        free(meshDecl->vertexUvData);
+        meshDecl->vertexUvData = nullptr;
+    }
+
+    free(meshDecl);
+    meshDecl = nullptr;
+}
+
 MeshBufferInfo createMesh(uint32_t vertexCount, uint32_t indexCount, bool normals, bool uvs) {
   MeshBufferInfo meshBufferInfo;
   meshBufferInfo.meshId = nextMeshId++;
@@ -17,8 +46,8 @@ MeshBufferInfo createMesh(uint32_t vertexCount, uint32_t indexCount, bool normal
   meshDecl->vertexCount = vertexCount;
   meshDecl->indexCount = indexCount;
 
-  meshDecl->indexData = new int[indexCount];
-  meshDecl->indexFormat = xatlas::IndexFormat::UInt16;
+  meshDecl->indexData = new uint32_t[indexCount];
+  meshDecl->indexFormat = xatlas::IndexFormat::UInt32;
   meshBufferInfo.indexOffset = (uint32_t)meshDecl->indexData;
 
   meshDecl->vertexPositionData = new float[vertexCount * 3];
@@ -47,9 +76,9 @@ UvMeshBufferInfo createUvMesh(int vertexCount, int indexCount) {
   uvMeshDecl = new xatlas::UvMeshDecl;
   uvMeshDecl->vertexCount = vertexCount;
   uvMeshDecl->indexCount = indexCount;
-  
-  uvMeshDecl->indexData = new uint16_t[indexCount];
-  uvMeshDecl->indexFormat = xatlas::IndexFormat::UInt16;
+
+  uvMeshDecl->indexData = new uint32_t[indexCount];
+  uvMeshDecl->indexFormat = xatlas::IndexFormat::UInt32;
   uvMeshBufferInfo.indexOffset = (uint32_t)uvMeshDecl->indexData;
 
   uvMeshDecl->vertexUvData = new float[vertexCount * 2];
