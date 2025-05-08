@@ -1,0 +1,7 @@
+name: Build
+on: [push]
+jobs:
+  Compile:
+    runs-on: emscripten/emsdk
+    steps:
+      - run: ./build-web.sh
