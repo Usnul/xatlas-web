@@ -4,7 +4,7 @@ jobs:
   Compile:
     runs-on: ubuntu-latest
     container: 
-      image: emscripten/emsdk
+      image: emscripten/emsdk:2.0.7
       options: --workdir /github/workspace
     steps:
       - name: Checkout repository
