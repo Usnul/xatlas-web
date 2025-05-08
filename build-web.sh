@@ -13,14 +13,13 @@ echo "============================================="
 (
   # Compile C/C++ code
   emcc \
-    -std=c++11 \
-    -fno-rtti \
+    -std=c++1y \
     -DXA_MULTITHREADED=0 \
     -DNDEBUG \
     ${OPTIMIZE} \
     --bind \
-    -s AUTO_NATIVE_LIBRARIES \
-    -s STRICT=1 \
+    --no-entry \
+    -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
     -s ALLOW_MEMORY_GROWTH=1 \
     -s MALLOC=emmalloc \
     -s MODULARIZE=1 \
