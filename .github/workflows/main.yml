@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: emscripten/emsdk
+      volumes:
+        - ${RUNNER_WORKSPACE}/${PROJECT_NAME}:$GITHUB_WORKSPACE
     steps:
       - run: ls -la
       - run: ./build-web.sh
