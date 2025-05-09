@@ -125,6 +125,7 @@ AtlasMeshBufferInfo getMeshData(uint32_t meshId) {
 }
 
 void destroyAtlas() {
+  cleanUpMesh();
   xatlas::Destroy(atlas);
   nextMeshId = 0;
 }

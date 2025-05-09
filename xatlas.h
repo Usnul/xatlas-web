@@ -117,7 +117,7 @@ struct MeshDecl
 	const void *vertexNormalData = nullptr; // optional
 	const void *vertexUvData = nullptr; // optional. The input UVs are provided as a hint to the chart generator.
 	const void *indexData = nullptr; // optional
-	
+
 	// Optional. indexCount / 3 (triangle count) in length.
 	// Don't atlas faces set to true. Ignored faces still exist in the output meshes, Vertex uv is set to (0, 0) and Vertex atlasIndex to -1.
 	const bool *faceIgnoreData = nullptr;
@@ -191,8 +191,8 @@ typedef void (*ParameterizeFunc)(const float *positions, float *texcoords, uint3
 struct ParameterizeOptions
 {
 	ParameterizeFunc func = nullptr;
-	bool closeHoles = true; // If the custom parameterization function works with multiple boundaries, this can be set to false to improve performance.
-	bool fixTJunctions = true; // If meshes don't have T-junctions, this can be set to false to improve performance.
+	bool closeHoles = false; // If the custom parameterization function works with multiple boundaries, this can be set to false to improve performance.
+	bool fixTJunctions = false; // If meshes don't have T-junctions, this can be set to false to improve performance.
 };
 
 // Call after ComputeCharts. Can be called multiple times to re-parameterize charts with a different ParameterizeFunc.
