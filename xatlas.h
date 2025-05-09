@@ -160,7 +160,7 @@ struct UvMeshDecl
 	uint32_t vertexStride = 0;
 	uint32_t indexCount = 0;
 	int32_t indexOffset = 0; // optional. Add this offset to all indices.
-	IndexFormat::Enum indexFormat = IndexFormat::UInt16;
+	IndexFormat::Enum indexFormat = IndexFormat::UInt32;
 	bool rotateCharts = true;
 };
 
@@ -192,7 +192,7 @@ struct ParameterizeOptions
 {
 	ParameterizeFunc func = nullptr;
 	bool closeHoles = false; // If the custom parameterization function works with multiple boundaries, this can be set to false to improve performance.
-	bool fixTJunctions = false; // If meshes don't have T-junctions, this can be set to false to improve performance.
+	bool fixTJunctions = true; // If meshes don't have T-junctions, this can be set to false to improve performance.
 };
 
 // Call after ComputeCharts. Can be called multiple times to re-parameterize charts with a different ParameterizeFunc.
@@ -204,7 +204,7 @@ struct PackOptions
 	bool bilinear = true;
 
 	// Align charts to 4x4 blocks. Also improves packing speed, since there are fewer possible chart locations to consider.
-	bool blockAlign = false;
+	bool blockAlign = true;
 
 	// Slower, but gives the best result. If false, use random chart placement.
 	bool bruteForce = false;
@@ -216,7 +216,7 @@ struct PackOptions
 	uint32_t maxChartSize = 0;
 
 	// Number of pixels to pad charts with.
-	uint32_t padding = 0;
+	uint32_t padding = 4;
 
 	// Unit to texel scale. e.g. a 1x1 quad with texelsPerUnit of 32 will take up approximately 32x32 texels in the atlas.
 	// If 0, an estimated value will be calculated to approximately match the given resolution.
@@ -226,7 +226,7 @@ struct PackOptions
 	// If 0, generate a single atlas with texelsPerUnit determining the final resolution.
 	// If not 0, and texelsPerUnit is not 0, generate one or more atlases with that exact resolution.
 	// If not 0, and texelsPerUnit is 0, texelsPerUnit is estimated to approximately match the resolution.
-	uint32_t resolution = 0;
+	uint32_t resolution = 1024;
 };
 
 // Call after ParameterizeCharts. Can be called multiple times to re-pack charts with different options.
