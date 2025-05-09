@@ -100,28 +100,41 @@ void generateAtlas() {
   xatlas::Generate(atlas);
 }
 
+uint32_t* originalIndexArray = nullptr;
+float* uvArray = nullptr;
+
 AtlasMeshBufferInfo getMeshData(uint32_t meshId) {
-  const xatlas::Mesh &mesh = atlas->meshes[meshId];
+    const xatlas::Mesh &mesh = atlas->meshes[meshId];
 
-  uint32_t* originalIndexArray = new uint32_t[mesh.vertexCount];
-  float* uvArray = new float[mesh.vertexCount * 2];
+    if(originalIndexArray != nullptr){
+            delete[] originalIndexArray;
+            originalIndexArray = nullptr;
+    }
 
-  for (uint32_t i = 0; i < mesh.vertexCount; i++) {
-    const xatlas::Vertex &vertex = mesh.vertexArray[i];
-    originalIndexArray[i] = vertex.xref;
-    uvArray[i * 2] = vertex.uv[0] / atlas->width;
-    uvArray[i * 2 + 1] = vertex.uv[1] / atlas->height;
-  }
+    if(uvArray != nullptr){
+            delete[] uvArray;
+            uvArray = nullptr;
+    }
 
-  AtlasMeshBufferInfo atlasMeshBufferInfo;
+    originalIndexArray =  new uint32_t[mesh.vertexCount];
+    uvArray = new float[mesh.vertexCount * 2];
 
-  atlasMeshBufferInfo.newVertexCount = mesh.vertexCount;
-  atlasMeshBufferInfo.newIndexCount = mesh.indexCount;
-  atlasMeshBufferInfo.indexOffset = (uint32_t)mesh.indexArray;
-  atlasMeshBufferInfo.originalIndexOffset = (uint32_t)originalIndexArray;
-  atlasMeshBufferInfo.uvOffset = (uint32_t)uvArray;
+    for (uint32_t i = 0; i < mesh.vertexCount; i++) {
+        const xatlas::Vertex &vertex = mesh.vertexArray[i];
+        originalIndexArray[i] = vertex.xref;
+        uvArray[i * 2] = vertex.uv[0] / atlas->width;
+        uvArray[i * 2 + 1] = vertex.uv[1] / atlas->height;
+    }
 
-  return atlasMeshBufferInfo;
+    AtlasMeshBufferInfo atlasMeshBufferInfo;
+
+    atlasMeshBufferInfo.newVertexCount = mesh.vertexCount;
+    atlasMeshBufferInfo.newIndexCount = mesh.indexCount;
+    atlasMeshBufferInfo.indexOffset = (uint32_t)mesh.indexArray;
+    atlasMeshBufferInfo.originalIndexOffset = (uint32_t)originalIndexArray;
+    atlasMeshBufferInfo.uvOffset = (uint32_t)uvArray;
+
+    return atlasMeshBufferInfo;
 }
 
 void destroyAtlas() {
