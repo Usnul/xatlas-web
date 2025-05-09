@@ -2,7 +2,7 @@
 
 set -e
 
-export OPTIMIZE="-Os"
+export OPTIMIZE="-O3"
 export LDFLAGS="${OPTIMIZE}"
 export CFLAGS="${OPTIMIZE}"
 export CPPFLAGS="${OPTIMIZE}"
@@ -24,7 +24,7 @@ echo "============================================="
     -s MALLOC=emmalloc \
     -s MODULARIZE=1 \
     -s ENVIRONMENT='web,worker' \
-    -s ASSERTIONS=1 \
+    -s ASSERTIONS=0 \
     --post-js './web/module-post.js' \
     -o ./xatlas-web.js \
     web/*.cpp \
