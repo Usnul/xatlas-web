@@ -191,7 +191,7 @@ typedef void (*ParameterizeFunc)(const float *positions, float *texcoords, uint3
 struct ParameterizeOptions
 {
 	ParameterizeFunc func = nullptr;
-	bool closeHoles = false; // If the custom parameterization function works with multiple boundaries, this can be set to false to improve performance.
+	bool closeHoles = true; // If the custom parameterization function works with multiple boundaries, this can be set to false to improve performance.
 	bool fixTJunctions = true; // If meshes don't have T-junctions, this can be set to false to improve performance.
 };
 

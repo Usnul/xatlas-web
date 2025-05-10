@@ -39,6 +39,9 @@ void cleanUpMesh(){
 }
 
 MeshBufferInfo createMesh(uint32_t vertexCount, uint32_t indexCount, bool normals, bool uvs) {
+
+  cleanUpMesh();
+
   MeshBufferInfo meshBufferInfo;
   meshBufferInfo.meshId = nextMeshId++;
 
@@ -138,7 +141,6 @@ AtlasMeshBufferInfo getMeshData(uint32_t meshId) {
 }
 
 void destroyAtlas() {
-  cleanUpMesh();
   xatlas::Destroy(atlas);
   nextMeshId = 0;
 }
